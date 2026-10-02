@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f5132" />
+  <title>Shadaqoh Jariah — Masjid Jamie At-Taqwa Seketi</title>
+  <meta name="description" content="Laporan terbuka shadaqoh jariah pembangunan tempat wudhu Masjid Jamie At-Taqwa Seketi." />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    :root{
+      --primary:#0f5132;
+      --primary-2:#166534;
+      --soft:#eef7f1;
+      --text:#173026;
+      --muted:#6c7c74;
+      --border:#dce8e1;
+      --card:#ffffff;
+      --bg:#f6faf7;
+      --gold:#b7791f;
+      --danger:#a33a2b;
+      --shadow:0 8px 30px rgba(27, 63, 45, .07);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit}
+    .topbar{background:var(--primary);color:#fff}
+    .topbar-inner{max-width:1120px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
+    .brand-mark{width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:22px}
+    .status{font-size:13px;opacity:.92;white-space:nowrap}
+    .wrap{max-width:1120px;margin:auto;padding:30px 20px 52px}
+    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:stretch}
+    .hero-copy,.progress-card,.card{background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:var(--radius)}
+    .hero-copy{padding:30px}
+    .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--primary);font-weight:800;margin-bottom:8px}
+    h1{font-size:34px;line-height:1.12;margin:0 0 12px;max-width:680px}
+    .subtitle{margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:680px}
+    .progress-card{padding:26px;display:flex;flex-direction:column;justify-content:center}
+    .progress-label{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);font-weight:700}
+    .progress-value{font-size:31px;font-weight:900;margin:7px 0 13px;color:var(--primary)}
+    .bar{height:12px;background:#e8eee9;border-radius:99px;overflow:hidden}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#43a56f);border-radius:99px;width:0;transition:width .6s ease}
+    .small-note{margin-top:11px;color:var(--muted);font-size:12px;line-height:1.5}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+    .stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 16px;box-shadow:var(--shadow)}
+    .stat .label{font-size:12px;color:var(--muted);font-weight:750}
+    .stat .value{font-size:22px;font-weight:900;margin-top:7px}
+    .section{margin-top:26px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:12px}
+    .section-head h2{font-size:20px;margin:0}
+    .section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .card{padding:18px}
+    .filters{display:grid;grid-template-columns:1fr 180px 190px;gap:10px;margin-bottom:14px}
+    .input,.select{width:100%;border:1px solid var(--border);background:#fff;border-radius:12px;padding:11px 12px;font:inherit;color:var(--text);outline:none}
+    .input:focus,.select:focus{border-color:#78ad92;box-shadow:0 0 0 3px rgba(67,165,111,.12)}
+    .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:14px}
+    table{width:100%;border-collapse:collapse;min-width:720px}
+    th,td{padding:12px 13px;border-bottom:1px solid #edf2ee;text-align:left;vertical-align:top;font-size:13px}
+    th{background:#f7faf8;color:#496157;font-size:11px;text-transform:uppercase;letter-spacing:.7px;position:sticky;top:0;z-index:1}
+    tr:last-child td{border-bottom:0}
+    td.num,th.num{text-align:right}
+    .badge{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:var(--soft);color:var(--primary);font-weight:750;font-size:11px}
+    .material{background:#fff6e6;color:#9a6109}
+    .muted{color:var(--muted)}
+    .empty{padding:28px;text-align:center;color:var(--muted)}
+    .notice{display:none;margin:0 0 18px;padding:13px 15px;border-radius:12px;background:#fff2ef;color:var(--danger);border:1px solid #f0cfc8;font-size:13px;line-height:1.5}
+    .footer{padding:28px 8px 0;color:var(--muted);font-size:12px;line-height:1.65;text-align:center}
+    .footer strong{color:var(--text)}
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:620px){
+      .wrap{padding:20px 14px 38px}
+      .topbar-inner{padding:12px 14px}
+      h1{font-size:28px}
+      .hero-copy,.progress-card{padding:22px}
+      .stats{grid-template-columns:1fr 1fr}
+      .filters{grid-template-columns:1fr}
+      .status{font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">🕌</div>
+        <div>Masjid Jamie At-Taqwa Seketi</div>
+      </div>
+      <div class="status" id="updatedStatus">Memuat laporan…</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="notice" id="errorBox"></div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Laporan Transparansi</div>
+        <h1>Shadaqoh Jariah Pembangunan Tempat Wudhu</h1>
+        <p class="subtitle">Laporan ini menampilkan data shadaqoh yang telah dicatat oleh panitia/pengurus. Data dikelola melalui spreadsheet administrasi dan ditampilkan kepada masyarakat sebagai laporan terbuka.</p>
+      </div>
+      <div class="progress-card">
+        <div class="progress-label"><span>Progress dana uang</span><span id="progressPct">0%</span></div>
+        <div class="progress-value" id="collectedHero">Rp0</div>
+        <div class="bar"><span id="progressBar"></span></div>
+        <div class="small-note">Target pembangunan: <strong id="targetHero">Rp0</strong>. Sumbangan material/ikrar yang belum memiliki taksiran harga tidak dimasukkan ke progress dana uang.</div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><div class="label">Target Anggaran</div><div class="value" id="targetStat">Rp0</div></div>
+      <div class="stat"><div class="label">Dana Uang Tercatat</div><div class="value" id="collectedStat">Rp0</div></div>
+      <div class="stat"><div class="label">Sisa Target</div><div class="value" id="remainingStat">Rp0</div></div>
+      <div class="stat"><div class="label">Donatur Tercatat</div><div class="value" id="donorCountStat">0</div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Daftar Shadaqoh</h2>
+          <p>Nama dan rincian di bawah mengikuti data yang dicantumkan pada spreadsheet admin.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="filters">
+          <input id="search" class="input" type="search" placeholder="Cari nama donatur…" aria-label="Cari nama donatur" />
+          <select id="rtFilter" class="select" aria-label="Filter RT"><option value="">Semua RT</option></select>
+          <select id="typeFilter" class="select" aria-label="Filter jenis"><option value="">Semua jenis sumbangan</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:60px">No.</th>
+                <th>Donatur</th>
+                <th style="width:110px">RT</th>
+                <th style="width:150px">Jenis</th>
+                <th class="num" style="width:165px">Nominal</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody id="donorBody">
+              <tr><td colspan="6" class="empty">Memuat data…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Ringkasan Material / Ikrar</h2>
+          <p>Sumbangan barang atau ikrar ditampilkan apa adanya sampai ada nilai taksiran rupiah.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div id="materialsList" class="muted">Memuat data…</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <strong>Catatan:</strong> website ini adalah halaman laporan publik. Pengubahan, penambahan, atau penghapusan data dilakukan oleh admin melalui spreadsheet, lalu file spreadsheet diperbarui di server.
+      <br/>Masjid Jamie At-Taqwa Seketi • Laporan Shadaqoh Jariah
+    </div>
+  </main>
+
+<script>
+  const SOURCE_FILE = 'data.xlsx';
+  const SHEET_NAME = 'INPUT SHADAQOH';
+  const CURRENCY = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
+
+  const els = {
+    errorBox: document.getElementById('errorBox'),
+    updatedStatus: document.getElementById('updatedStatus'),
+    targetHero: document.getElementById('targetHero'),
+    collectedHero: document.getElementById('collectedHero'),
+    progressPct: document.getElementById('progressPct'),
+    progressBar: document.getElementById('progressBar'),
+    targetStat: document.getElementById('targetStat'),
+    collectedStat: document.getElementById('collectedStat'),
+    remainingStat: document.getElementById('remainingStat'),
+    donorCountStat: document.getElementById('donorCountStat'),
+    search: document.getElementById('search'),
+    rtFilter: document.getElementById('rtFilter'),
+    typeFilter: document.getElementById('typeFilter'),
+    donorBody: document.getElementById('donorBody'),
+    materialsList: document.getElementById('materialsList')
+  };
+
+  let state = { target: 0, donors: [], materials: [] };
+
+  function money(value) {
+    const n = Number(value || 0);
+    return CURRENCY.format(n).replace('Rp', 'Rp ');
+  }
+  function text(value) { return String(value ?? '').trim(); }
+  function showError(message) {
+    els.errorBox.textContent = message;
+    els.errorBox.style.display = 'block';
+  }
+  function hideError() { els.errorBox.style.display = 'none'; }
+
+  function normalizeRow(row) {
+    return {
+      no: row[0],
+      name: text(row[1]),
+      rt: text(row[2]),
+      type: text(row[3]),
+      amount: Number(row[4] || 0),
+      amountEntered: row[4] !== null && row[4] !== undefined && row[4] !== '',
+      note: text(row[5])
+    };
+  }
+
+  async function loadWorkbook() {
+    const response = await fetch(SOURCE_FILE + '?v=' + Date.now(), { cache: 'no-store' });
+    if (!response.ok) throw new Error('File data.xlsx tidak dapat dibaca. Pastikan file berada di folder yang sama dengan index.html.');
+    const buffer = await response.arrayBuffer();
+    const workbook = XLSX.read(buffer, { type: 'array' });
+    const sheet = workbook.Sheets[SHEET_NAME];
+    if (!sheet) throw new Error('Sheet "INPUT SHADAQOH" tidak ditemukan di data.xlsx.');
+    const grid = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null, raw: true });
+    const target = Number(grid?.[3]?.[1] || 0);
+    const raw = grid.slice(9).map(normalizeRow);
+    // Ignore completely empty rows and the incomplete placeholder "Bp.".
+    const valid = raw.filter(r => r.name && r.name !== 'Bp.');
+    const donors = valid.filter(r => r.type !== 'Material/Ikrar');
+    const materials = valid.filter(r => r.type === 'Material/Ikrar');
+    return { target, donors: valid, materials };
+  }
+
+  function renderSummary() {
+    const target = state.target;
+    const cash = state.donors.reduce((sum, d) => sum + (d.amountEntered ? d.amount : 0), 0);
+    const progress = target > 0 ? Math.min(cash / target, 1) : 0;
+    const remaining = Math.max(target - cash, 0);
+
+    els.targetHero.textContent = money(target);
+    els.collectedHero.textContent = money(cash);
+    els.progressPct.textContent = (progress * 100).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + '%';
+    els.progressBar.style.width = (progress * 100) + '%';
+    els.targetStat.textContent = money(target);
+    els.collectedStat.textContent = money(cash);
+    els.remainingStat.textContent = money(remaining);
+    els.donorCountStat.textContent = state.donors.length.toLocaleString('id-ID');
+
+    const rts = [...new Set(state.donors.map(d => d.rt).filter(Boolean))].sort();
+    const types = [...new Set(state.donors.map(d => d.type).filter(Boolean))].sort();
+    els.rtFilter.innerHTML = '<option value="">Semua RT</option>' + rts.map(rt => `<option value="${escapeHtml(rt)}">${escapeHtml(rt)}</option>`).join('');
+    els.typeFilter.innerHTML = '<option value="">Semua jenis sumbangan</option>' + types.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+
+    els.updatedStatus.textContent = 'Data dari spreadsheet admin';
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  }
+
+  function renderTable() {
+    const q = text(els.search.value).toLowerCase();
+    const rt = els.rtFilter.value;
+    const type = els.typeFilter.value;
+    const filtered = state.donors.filter(d => {
+      const hay = `${d.name} ${d.rt} ${d.type} ${d.note}`.toLowerCase();
+      return (!q || hay.includes(q)) && (!rt || d.rt === rt) && (!type || d.type === type);
+    });
+
+    if (!filtered.length) {
+      els.donorBody.innerHTML = '<tr><td colspan="6" class="empty">Tidak ada data yang sesuai.</td></tr>';
+      return;
+    }
+
+    els.donorBody.innerHTML = filtered.map(d => `
+      <tr>
+        <td>${escapeHtml(d.no)}</td>
+        <td><strong>${escapeHtml(d.name)}</strong></td>
+        <td>${escapeHtml(d.rt || '-')}</td>
+        <td><span class="badge">${escapeHtml(d.type || '-')}</span></td>
+        <td class="num">${d.amountEntered ? money(d.amount) : '<span class="muted">—</span>'}</td>
+        <td>${escapeHtml(d.note || '') || '<span class="muted">—</span>'}</td>
+      </tr>`).join('');
+  }
+
+  function renderMaterials() {
+    if (!state.materials.length) {
+      els.materialsList.innerHTML = '<div class="empty">Belum ada data material / ikrar.</div>';
+      return;
+    }
+    els.materialsList.innerHTML = `<div style="display:grid;gap:10px">${state.materials.map(d => `
+      <div style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid #edf2ee">
+        <div><strong>${escapeHtml(d.name)}</strong><div class="muted" style="font-size:12px;margin-top:4px">${escapeHtml(d.rt || '-')}</div></div>
+        <div style="text-align:right"><span class="badge material">${escapeHtml(d.note || d.type || 'Material/Ikrar')}</span>${d.amountEntered ? `<div style="font-weight:800;margin-top:5px">${money(d.amount)}</div>` : ''}</div>
+      </div>`).join('')}</div>`;
+  }
+
+  async function init() {
+    try {
+      state = await loadWorkbook();
+      hideError();
+      renderSummary();
+      renderTable();
+      renderMaterials();
+    } catch (err) {
+      showError(err.message || 'Terjadi kesalahan saat membaca data.');
+      els.updatedStatus.textContent = 'Gagal memuat data';
+      els.donorBody.innerHTML = '<tr><td colspan="6" class="empty">Data belum dapat dimuat.</td></tr>';
+      els.materialsList.innerHTML = '<div class="empty">Data belum dapat dimuat.</div>';
+    }
+  }
+
+  [els.search, els.rtFilter, els.typeFilter].forEach(el => el.addEventListener('input', renderTable));
+  init();
+</script>
+</body>
+</html>
